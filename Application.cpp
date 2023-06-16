@@ -147,16 +147,52 @@ void Application::AfficherParDossard()
 /// </summary>
 void Application::NoterConcurrents()
 {
-	//@TODO � compl�ter.
+    // Parcourt les concurrents inscrits dans leur ordre d'inscription
+    while (!concurrentsInscrits.empty())
+    {
+        // Récupère le premier concurrent
+        Concurrent concurrent = concurrentsInscrits.front();
+        concurrentsInscrits.pop_front();
+
+        // Affecte un score aléatoire entre 0 et 10 inclus
+        int score = hasard(0, 11);
+
+        // Insère le concurrent noté dans le conteneur resultat
+        auto it = lower_bound(resultats.begin(), resultats.end(), score, [](const Concurrent& c, int s) {
+            return c.getScore() > s;
+        });
+        resultats.insert(it, concurrent.setScore(score));
+    }
+
+    cout << "Tous les concurrents ont été notés et insérés dans le conteneur 'resultats'." << endl;
 }
+
 
 /// <summary>
 /// Affiche le score, le dossard et le nom des concurrents not�s.
 /// </summary>
 void Application::AfficherResultats()
 {
-	//@TODO � compl�ter.
+    // Vérifie s'il n'y a pas de résultats
+    if (resultats.empty())
+    {
+        cout << "Aucun résultat à afficher." << endl;
+        return;
+    }
+
+    // Trie les résultats par score en ordre décroissant
+    sort(resultats.begin(), resultats.end(), [](const Concurrent& c1, const Concurrent& c2) {
+        return c1.GetScore() > c2.GetScore();
+    });
+
+    // Affiche les résultats
+    cout << "Résultats de la compétition :" << endl;
+    for (const Concurrent& concurrent : resultats)
+    {
+        cout << "Score : " << concurrent.GetScore() << ", Dossard : " << concurrent.GetDossard() << ", Nom : " << concurrent.GetNom() << endl;
+    }
 }
+
 
 /// <summary>
 /// Boucle d'execution du programme.

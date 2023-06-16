@@ -8,6 +8,7 @@ Concurrent::Concurrent(string nom, int dossard)
 //	cout << "--> Concurrent(nom) de " << this << endl;
 	this->nom = nom;
 	this->dossard = dossard;
+	this->score = score;
 }
 
 Concurrent::~Concurrent()

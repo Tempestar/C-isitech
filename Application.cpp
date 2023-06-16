@@ -88,7 +88,7 @@ void Application::InscrireUnConcurrent()
     concurrentsInscrits.push_back(concurrent);
 
     // Affichage du concurrent instancié (nom et dossard)
-    cout << "Concurrent inscrit : " << concurrent.getNom() << " (Dossard : " << concurrent.getDossard() << ")" << endl;
+    cout << "Concurrent inscrit : " << concurrent.GetNom() << " (Dossard : " << concurrent.GetDossard() << ")" << endl;
 
     // Affichage du nombre de dossards disponibles
     cout << "Nombre de dossards disponibles : " << dossardsPourAffectation.size() << endl;
@@ -101,14 +101,14 @@ void Application::AfficherParNom()
 {
 	// Trie les concurrents par ordre alphabétique des noms
     sort(concurrentsInscrits.begin(), concurrentsInscrits.end(), [](const Concurrent& c1, const Concurrent& c2) {
-        return c1.getNom() < c2.getNom();
+        return c1.GetNom() < c2.GetNom();
     });
 
 	// Affiche les concurrents inscrits par ordre alphabétique des noms
     cout << "Liste des concurrents inscrits par ordre alphabétique des noms :" << endl;
     for (const Concurrent& concurrent : concurrentsInscrits)
     {
-        cout << "Nom: " << concurrent.getNom() << " - Dossard: " << concurrent.getDossard() << endl;
+        cout << "Nom: " << concurrent.GetNom() << " - Dossard: " << concurrent.GetDossard() << endl;
     }
 }
 
@@ -147,25 +147,29 @@ void Application::AfficherParDossard()
 /// </summary>
 void Application::NoterConcurrents()
 {
-    // Parcourt les concurrents inscrits dans leur ordre d'inscription
-    while (!concurrentsInscrits.empty())
+    if (concurrentsInscrits.empty())
     {
-        // Récupère le premier concurrent
-        Concurrent concurrent = concurrentsInscrits.front();
-        concurrentsInscrits.pop_front();
-
-        // Affecte un score aléatoire entre 0 et 10 inclus
-        int score = hasard(0, 11);
-
-        // Insère le concurrent noté dans le conteneur resultat
-        auto it = lower_bound(resultats.begin(), resultats.end(), score, [](const Concurrent& c, int s) {
-            return c.getScore() > s;
-        });
-        resultats.insert(it, concurrent.setScore(score));
+        cout << "Aucun concurrent inscrit." << endl;
+        return;
     }
 
-    cout << "Tous les concurrents ont été notés et insérés dans le conteneur 'resultats'." << endl;
+    Concurrent premierConcurrent = concurrentsInscrits.front();  // Récupère le premier concurrent
+    concurrentsInscrits.erase(concurrentsInscrits.begin());  // Supprime le premier concurrent
+
+    int score = hasard(0, 11);  // Génère un score aléatoire entre 0 et 10 inclus
+
+    // Insère le concurrent noté dans le conteneur resultats en fonction de son score (par ordre décroissant)
+    auto it = resultats.begin();
+    while (it != resultats.end() && score <= it->score)
+    {
+        ++it;
+    }
+    resultats.insert(it, Concurrent(score, premierConcurrent.getDossard(), premierConcurrent.getNom()));
+
+    cout << "Le concurrent avec le dossard " << premierConcurrent.getDossard() << " a été noté avec un score de " << score << "." << endl;
 }
+
+
 
 
 /// <summary>

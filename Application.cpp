@@ -164,7 +164,7 @@ void Application::NoterConcurrents()
     {
         ++it;
     }
-    resultats.insert(it, Concurrent(score, premierConcurrent.GetDossard(), premierConcurrent.GetNom()));
+    resultats.insert(it, {score, premierConcurrent.getDossard(), premierConcurrent.getNom()});
 
     cout << "Le concurrent avec le dossard " << premierConcurrent.GetDossard() << " a été noté avec un score de " << score << "." << endl;
 }

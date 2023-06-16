@@ -6,6 +6,7 @@
 #include <map>
 #include <functional>
 #include <iterator>
+#include <vector>
 
 /// <summary>
 /// La classe Application est celle qui contient tout le fonctionnement du programme
@@ -20,35 +21,37 @@ private:
 
 	/// <summary>
 	/// 
-	/// @TODO Déclarer les 3 conteneurs avec les noms et caractéristiques indiqués dans le sujet
+	/// @TODO Dï¿½clarer les 3 conteneurs avec les noms et caractï¿½ristiques indiquï¿½s dans le sujet
 	/// 
 	/// </summary>
 
-
+    std::vector<int> dossardsPourAffectation;
+	std::vector<Concurrent> concurrentsInscrits;
+    std::vector<Concurrent> resultats;
 
 public:
 	/// <summary>
-	/// Initialiser la compétition.
-	/// Consiste à saisir le nombre de dossards nécessaires (= nombre de concurrents)
-	/// puis à les créer dans le conteneur dossardsPourAffectation.
+	/// Initialiser la compï¿½tition.
+	/// Consiste ï¿½ saisir le nombre de dossards nï¿½cessaires (= nombre de concurrents)
+	/// puis ï¿½ les crï¿½er dans le conteneur dossardsPourAffectation.
 	/// Entre 2 et 100 dossards.
 	/// </summary>
 	void InitialiserCompetition();
 
 	/// <summary>
 	/// Inscrire un concurent.
-	/// Après vérification qu'il reste un dossard disponible, il faut:
+	/// Aprï¿½s vï¿½rification qu'il reste un dossard disponible, il faut:
 	/// - saisir le nom du concurrent
 	/// - retirer 1 dossard au hasard dans le conteneur dossardsPourAffectation
-	/// - créer le concurrent avec son nom et le dossard
+	/// - crï¿½er le concurrent avec son nom et le dossard
 	/// - ajouter le concurrent au conteneur concurentsInscrits
 	/// Pas d'inscription possible s'il ne reste plus de dossard disponible.
-	/// Le concurrent est affiché ainsi que le nombre de dossards pouvant encore être attribués.
+	/// Le concurrent est affichï¿½ ainsi que le nombre de dossards pouvant encore ï¿½tre attribuï¿½s.
 	/// </summary>
 	void InscrireUnConcurrent();
 
 	/// <summary>
-	/// Affiche la liste des concurrents inscrits par ordre alphabétique des noms
+	/// Affiche la liste des concurrents inscrits par ordre alphabï¿½tique des noms
 	/// </summary>
 	void AfficherParNom();
 
@@ -61,19 +64,19 @@ public:
 	/// Permet de noter (scorer) tous les concurrents.
 	/// - extrait et supprime le premier concurrent du conteneur concurentsInscrits
 	/// - lui affecte un score entre 0 et 10 inclus
-	/// - insère le concurrent noté dans le conteneur resultats, les mieux notés rangés en premier
-	/// Le score doit servir de clé pour retrouver tous les concurrents ayant un certain score.
-	/// Attention!! On peut avoir plusieurs concurrents avec le même score.
+	/// - insï¿½re le concurrent notï¿½ dans le conteneur resultats, les mieux notï¿½s rangï¿½s en premier
+	/// Le score doit servir de clï¿½ pour retrouver tous les concurrents ayant un certain score.
+	/// Attention!! On peut avoir plusieurs concurrents avec le mï¿½me score.
 	/// </summary>
 	void NoterConcurrents();
 
 	/// <summary>
-	/// Affiche le score, le dossard et le nom des concurrents notés.
+	/// Affiche le score, le dossard et le nom des concurrents notï¿½s.
 	/// </summary>
 	void AfficherResultats();
 
 	/// <summary>
-	/// Boucle d'exécution du programme.
+	/// Boucle d'exï¿½cution du programme.
 	/// </summary>
 	void Run();
 };

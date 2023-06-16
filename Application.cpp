@@ -71,6 +71,27 @@ void Application::InscrireUnConcurrent()
 
     string nomConcurrent;
     int dossard;
+
+	// Saisie du nom du concurrent
+    cout << "Entrez le nom du concurrent : ";
+    cin >> nomConcurrent;
+
+    // Retire un dossard au hasard du conteneur dossardsPourAffectation
+    int indexDossard = hasard(0, dossardsPourAffectation.size());
+    dossard = dossardsPourAffectation[indexDossard];
+    dossardsPourAffectation.erase(dossardsPourAffectation.begin() + indexDossard);
+
+    // Instanciation du concurrent avec son nom et le dossard récupéré
+    Concurrent concurrent(nomConcurrent, dossard);
+
+    // Ajout du concurrent au conteneur concurrentsInscrits
+    concurrentsInscrits.push_back(concurrent);
+
+    // Affichage du concurrent instancié (nom et dossard)
+    cout << "Concurrent inscrit : " << concurrent.getNom() << " (Dossard : " << concurrent.getDossard() << ")" << endl;
+
+    // Affichage du nombre de dossards disponibles
+    cout << "Nombre de dossards disponibles : " << dossardsPourAffectation.size() << endl;
 }
 
 /// <summary>
@@ -78,7 +99,12 @@ void Application::InscrireUnConcurrent()
 /// </summary>
 void Application::AfficherParNom()
 {
-	//@TODO � compl�ter.
+	// Trie les concurrents par ordre alphabétique des noms
+    sort(concurrentsInscrits.begin(), concurrentsInscrits.end(), [](const Concurrent& c1, const Concurrent& c2) {
+        return c1.getNom() < c2.getNom();
+    });
+
+
 }
 
 /// <summary>

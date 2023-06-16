@@ -104,7 +104,12 @@ void Application::AfficherParNom()
         return c1.getNom() < c2.getNom();
     });
 
-
+	// Affiche les concurrents inscrits par ordre alphabétique des noms
+    cout << "Liste des concurrents inscrits par ordre alphabétique des noms :" << endl;
+    for (const Concurrent& concurrent : concurrentsInscrits)
+    {
+        cout << "Nom: " << concurrent.getNom() << " - Dossard: " << concurrent.getDossard() << endl;
+    }
 }
 
 /// <summary>
@@ -112,7 +117,24 @@ void Application::AfficherParNom()
 /// </summary>
 void Application::AfficherParDossard()
 {
-	//@TODO � compl�ter.
+	// Vérifie s'il n'y a pas de concurrent inscrit
+    if (concurrentsInscrits.empty())
+    {
+        cout << "Aucun concurrent inscrit." << endl;
+        return;
+    }
+
+	// Trie les concurrents par dossard en ordre croissant
+    sort(concurrentsInscrits.begin(), concurrentsInscrits.end(), [](const Concurrent& c1, const Concurrent& c2) {
+        return c1.GetDossard() < c2.GetDossard();
+    });
+
+	// Affiche la liste des concurrents par dossard
+    cout << "Liste des concurrents inscrits par dossard :" << endl;
+    for (const Concurrent& concurrent : concurrentsInscrits)
+    {
+        cout << "Dossard : " << concurrent.GetDossard() << ", Nom : " << concurrent.GetNom() << endl;
+    }
 }
 
 /// <summary>

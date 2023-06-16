@@ -160,7 +160,7 @@ void Application::NoterConcurrents()
 
     // Insère le concurrent noté dans le conteneur resultats en fonction de son score (par ordre décroissant)
     auto it = resultats.begin();
-    while (it != resultats.end() && score <= it->score)
+    while (it != resultats.end() && score <= it->GetScore())
     {
         ++it;
     }

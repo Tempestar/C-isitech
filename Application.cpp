@@ -62,11 +62,19 @@ void Application::InitialiserCompetition()
 /// </summary>
 void Application::InscrireUnConcurrent()
 {
-	//@TODO � compl�ter.
+    // Vérifie s'il reste des dossards disponibles
+    if (dossardsPourAffectation.empty())
+    {
+        cout << "Il n'y a plus de dossards disponibles." << endl;
+        return;
+    }
+
+    string nomConcurrent;
+    int dossard;
 }
 
 /// <summary>
-/// Affiche la liste des concurrents inscrits, par ordre alphab�tique des noms
+/// Affiche la liste des concurrents inscrits, par ordre alphabetique des noms
 /// </summary>
 void Application::AfficherParNom()
 {

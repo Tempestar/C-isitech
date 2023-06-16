@@ -62,15 +62,7 @@ void Application::InitialiserCompetition()
 /// </summary>
 void Application::InscrireUnConcurrent()
 {
-    // Vérifie s'il reste des dossards disponibles
-    if (dossardsPourAffectation.empty())
-    {
-        cout << "Il n'y a plus de dossards disponibles." << endl;
-        return;
-    }
-
-    string nomConcurrent;
-    int dossard;
+	//@TODO � compl�ter.
 }
 
 /// <summary>
